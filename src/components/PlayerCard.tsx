@@ -39,9 +39,9 @@ export default function PlayerCard({
         <h1 className="text-center animate-pulse">Performing action</h1>
       ) : (
         <>
-          <h1 className="text-center font-bold">Decide your path</h1>
+          <h1 className="text-center font-bold">{data.Prompt}</h1>
           <div className="grid grid-cols-2 justify-between gap-4">
-            {data["Possible Commands"].map((command, index) => (
+            {data.Commands.map((command, index) => (
               <button
                 className="opacity-50 hover:opacity-100"
                 key={index}

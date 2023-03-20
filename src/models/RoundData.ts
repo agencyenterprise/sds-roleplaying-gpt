@@ -13,7 +13,8 @@ type RoundData = {
   Inventory: any[];
   Quest: string;
   Abilities: any[];
-  "Possible Commands": any[];
+  Commands: any[];
+  Prompt: string;
 };
 
 export default RoundData;
