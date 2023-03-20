@@ -36,80 +36,57 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Head>
-        <title>Roleplaying GPT</title>
-        <meta name="description" content="Roleplaying GPT" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.png" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/agencyenterprise/sds-utils@latest/dist/packages/badge/src/lib/badge.css"
+    <main className="flex min-h-screen flex-col overflow-hidden items-center justify-center">
+      <div className="relative w-full my-6 max-w-2xl p-4">
+        <div
+          id="parchment"
+          className="absolute top-0 right-0 bottom-0 left-0"
         />
-      </Head>
-      <main className="flex min-h-screen flex-col overflow-hidden items-center justify-center">
-        <div className="relative w-full my-6 max-w-2xl p-4">
-          <div
-            id="parchment"
-            className="absolute top-0 right-0 bottom-0 left-0"
-          />
 
-          <h1 className="inkTitle mb-6">Roleplaying GPT</h1>
-          {data?.length > 0 ? (
-            <PlayerCard
-              data={data[data.length - 1]}
-              onChooseCommand={handleChooseCommand}
-              loading={loading}
+        <h1 className="inkTitle mb-6">Roleplaying GPT</h1>
+        {data?.length > 0 ? (
+          <PlayerCard
+            data={data[data.length - 1]}
+            onChooseCommand={handleChooseCommand}
+            loading={loading}
+          />
+        ) : (
+          <div className="flex flex-col gap-2">
+            <span className="text-neutral-600">
+              Input your OpenAI API Key before start
+            </span>
+            <input
+              type="text"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              placeholder="Key"
+              className="w-full rounded-md border border-orange-400 saturate-50 text-black placeholder:text-neutral-700 outline-none text-sm p-1"
             />
-          ) : (
-            <div className="flex flex-col gap-2">
-              <span className="text-neutral-600">
-                Input your OpenAI API Key before start
-              </span>
-              <input
-                type="text"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Key"
-                className="w-full rounded-md border border-orange-400 saturate-50 text-black placeholder:text-neutral-700 outline-none text-sm p-1"
-              />
-              <button
-                className={classNames(
-                  "opacity-50 hover:opacity-100",
-                  loading && "animate-pulse"
-                )}
-                onClick={handleStart}
-                disabled={apiKey.length <= 0 || loading}
-              >
-                {loading ? "Starting..." : "Start your adventure"}
-              </button>
-            </div>
-          )}
-        </div>
-        <svg className="hidden">
-          <filter id="wavy2">
-            <feTurbulence
-              x="0"
-              y="0"
-              baseFrequency="0.02"
-              numOctaves="5"
-              seed="1"
-            />
-            <feDisplacementMap in="SourceGraphic" scale="20" />
-          </filter>
-        </svg>
-      </main>
-      <Script
-        id="badge"
-        src="https://cdn.jsdelivr.net/gh/agencyenterprise/sds-utils@latest/dist/packages/badge/src/lib/badge.js"
-        onLoad={() => {
-          (window as any).SDSUtilsBadge({
-            expandable: true,
-            location: "bottomright",
-            position: "fixed",
-          });
-        }}
-      ></Script>
-    </>
+            <button
+              className={classNames(
+                "opacity-50 hover:opacity-100",
+                loading && "animate-pulse"
+              )}
+              onClick={handleStart}
+              disabled={apiKey.length <= 0 || loading}
+            >
+              {loading ? "Starting..." : "Start your adventure"}
+            </button>
+          </div>
+        )}
+      </div>
+      <svg className="hidden">
+        <filter id="wavy2">
+          <feTurbulence
+            x="0"
+            y="0"
+            baseFrequency="0.02"
+            numOctaves="5"
+            seed="1"
+          />
+          <feDisplacementMap in="SourceGraphic" scale="20" />
+        </filter>
+      </svg>
+    </main>
   );
 }
