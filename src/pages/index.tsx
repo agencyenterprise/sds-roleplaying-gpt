@@ -8,30 +8,30 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [apiKey, setApiKey] = useState("");
-  const [parentId, setParentId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<RoundData[]>([]);
+  const [data, setData] = useState<RoundData>();
+  const [messages, setMessages] = useState([]);
 
   const handleChooseCommand = async (command) => {
     setLoading(true);
     const res = await axios.post("/api/run", {
       text: command,
-      parentId,
+      messages,
       apiKey,
     });
-    setData((prev) => [...prev, res.data.result]);
+    setData(res.data.result);
     setLoading(false);
   };
 
   const handleStart = async () => {
     setLoading(true);
     const res = await axios.post("/api/run", {
-      text: "",
-      parentId,
+      text: "Start",
+      messages,
       apiKey,
     });
-    setParentId(res.data.parentId);
-    setData((prev) => [...prev, res.data.result]);
+    setMessages(res.data.messages);
+    setData(res.data.result);
     setLoading(false);
   };
 
@@ -44,9 +44,9 @@ export default function Home() {
         />
 
         <h1 className="inkTitle mb-6">Roleplaying GPT</h1>
-        {data?.length > 0 ? (
+        {data ? (
           <PlayerCard
-            data={data[data.length - 1]}
+            data={data}
             onChooseCommand={handleChooseCommand}
             loading={loading}
           />
