@@ -102,7 +102,7 @@ export default function Home() {
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   placeholder="Key"
-                  className="w-full rounded-md border border-orange-400 saturate-50 text-black placeholder:text-neutral-700 outline-none text-sm p-1"
+                  className="w-full rounded-md border border-[#CAAD8B] text-black placeholder:text-neutral-700 outline-none text-sm p-1"
                 />
                 <button
                   className={classNames(
