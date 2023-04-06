@@ -218,9 +218,15 @@ export default function Home() {
             >
               Add API Key
             </button>
-            <button className="flex flex-col p-2 bg-gray-500" disabled onClick={handleSubscribe}>
+            <button
+              className="flex flex-col p-2 bg-gray-500"
+              disabled
+              onClick={handleSubscribe}
+            >
               <h1>Subscribe $5 a month</h1>
-              <h1 className="mx-auto text-sm font-light text-center">Coming soon</h1>
+              <h1 className="mx-auto text-sm font-light text-center">
+                Coming soon
+              </h1>
             </button>
           </div>
           {useApiKey && (
@@ -245,7 +251,15 @@ export default function Home() {
             <br />
             {`We only require subscriptions in order to meet operating costs. Feel free to add your own API key to play for free.`}
             <br />
-            {`This project is open source, and you can contribute on GitHub`}
+            {`This project is open source, and you can contribute on`}
+            <a
+              href="https://github.com/agencyenterprise/sds-roleplaying-gpt"
+              rel="noreferrer"
+              target="_blank"
+              className="text-[#A68A69]"
+            >
+              {` Github`}
+            </a>
           </h1>
         </div>
       )}
