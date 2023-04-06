@@ -132,7 +132,7 @@ export default function Home() {
               <h1 className="p-8 bg-[#CAAD8B]">
                 Notice: This is an experimental project using GPT, your
                 adventure might not work perfectly. If you run into issues, use
-                the "other" command to perform more accurate commands.
+                the &quot;other&quot; command to perform more accurate commands.
                 <br />
                 <br />
                 Adventure resets upon page refresh.
