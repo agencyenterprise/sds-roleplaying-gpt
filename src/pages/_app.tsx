@@ -2,8 +2,12 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <>
       <Head>
@@ -22,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
           href="https://cdn.jsdelivr.net/gh/agencyenterprise/sds-utils@latest/dist/packages/badge/src/lib/badge.css"
         />
 
-        <link rel="icon" type="image/png" href="/logo.png" />
+        <link rel="icon" type="image/svg" href="/logo.svg" />
 
         <title>Roleplaying GPT</title>
         <meta name="title" content="Roleplaying GPT" />
@@ -32,10 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:url" content="https://roleplayinggpt.com/" />
         <meta property="og:title" content="Roleplaying GPT" />
         <meta property="og:description" content="Roleplaying GPT" />
-        <meta
-          property="og:image"
-          content="https://roleplayinggpt.com/og.jpg"
-        />
+        <meta property="og:image" content="https://roleplayinggpt.com/og.jpg" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://roleplayinggpt.com/" />
@@ -46,7 +47,9 @@ export default function App({ Component, pageProps }: AppProps) {
           content="https://roleplayinggpt.com/og.jpg"
         ></meta>
       </Head>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
       <Script
         id="badge"
         src="https://cdn.jsdelivr.net/gh/agencyenterprise/sds-utils@latest/dist/packages/badge/src/lib/badge.js"
