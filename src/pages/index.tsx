@@ -220,13 +220,15 @@ export default function Home() {
             </button>
             <button
               className="flex flex-col p-2 bg-gray-500"
-              disabled
+              disabled={userSession.status !== "authenticated"}
               onClick={handleSubscribe}
             >
               <h1>Subscribe $5 a month</h1>
-              <h1 className="mx-auto text-sm font-light text-center">
-                Coming soon
-              </h1>
+              {userSession.status !== "authenticated" && (
+                <h1 className="mx-auto text-sm font-light text-center">
+                  Login first
+                </h1>
+              )}
             </button>
           </div>
           {useApiKey && (
