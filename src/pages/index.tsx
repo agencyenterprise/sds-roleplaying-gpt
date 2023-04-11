@@ -129,7 +129,7 @@ export default function Home() {
                 {`You’re beginning an adventure in fantasy world. Opportunity
               awaits!`}
               </h1>
-              <h1 className="p-8 bg-[#CAAD8B]">
+              <h1 className="p-8">
                 Notice: This is an experimental project using GPT, your
                 adventure might not work perfectly. If you run into issues, use
                 the &quot;other&quot; command to perform more accurate commands.

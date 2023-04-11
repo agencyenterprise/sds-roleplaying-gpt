@@ -69,7 +69,7 @@ export default async function handler(
 
   const result = await openai.createChatCompletion({
     messages,
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
   });
 
   messages.push(result.data.choices[0].message);
