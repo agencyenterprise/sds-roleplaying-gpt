@@ -10,6 +10,8 @@ import logo from "@/assets/logo.svg";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import animationData from "../assets/lottie-sword.json";
+import Lottie from "react-lottie";
 
 export default function Home() {
   const [apiKey, setApiKey] = useState("");
@@ -23,6 +25,15 @@ export default function Home() {
   const userSession = useSession();
   const router = useRouter();
   const [subscription, setSubscription] = useState<any>(null);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   const hasFullAccess = apiKey?.length > 0 || subscription;
   const modalOpened = turnsLeft <= 0 && !hasFullAccess;
@@ -191,9 +202,14 @@ export default function Home() {
                     </div>
                   )}
                   {loading && (
-                    <h1 className="text-lg text-center animate-pulse">
-                      Starting...
-                    </h1>
+                    <>
+                      <div className="relative h-[140px] flex flex-row justify-center">
+                        <div className="absolute h-[250px] -bottom-4">
+                          <Lottie options={defaultOptions} />
+                          <h1 className="text-center">Loading</h1>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </>
               )}
