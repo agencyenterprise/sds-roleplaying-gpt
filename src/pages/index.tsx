@@ -19,7 +19,7 @@ export default function Home() {
   const [data, setData] = useState<RoundData>();
   const [messages, setMessages] = useState([]);
   const [infoTabOpened, setInfoTabOpened] = useState(false);
-  const [turnsLeft, setTurnsLeft] = useState(5);
+  const [turnsLeft, setTurnsLeft] = useState(10);
   const [useApiKey, setUseApiKey] = useState(false);
   const [auxApiKey, setAuxApiKey] = useState("");
   const userSession = useSession();
