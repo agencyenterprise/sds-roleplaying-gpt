@@ -69,7 +69,7 @@ export default async function handler(
 
   const result = await openai.createChatCompletion({
     messages,
-    model: "gpt-4",
+    model: "gpt-4-1106-preview",
   });
 
   messages.push(result.data.choices[0].message);
