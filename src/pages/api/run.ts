@@ -66,15 +66,15 @@ export default async function handler(
 
   messages.push({ role: "user", content: text });
 
-  const result = await openai.createChatCompletion({
+  const result = await openai.chat.completions.create({
     messages,
     model: "gpt-4-1106-preview",
   });
 
-  messages.push(result.data.choices[0].message);
+  messages.push(result.choices[0].message);
 
-  const stringResult = result.data.choices[0].message?.content
-    .slice(0, result.data.choices[0].message.content.lastIndexOf(`}`) + 1)
+  const stringResult = result.choices[0].message
+    .content!.slice(0, result.choices[0].message.content!.lastIndexOf(`}`) + 1)
     .trim();
   const parsedResult = JSON.parse(stringResult!);
 
