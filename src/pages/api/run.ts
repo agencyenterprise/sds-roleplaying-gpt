@@ -37,30 +37,27 @@ export default async function handler(
       Commands: List all available commands here, following the storyline.
       Prompt: all game prompts go here. The first message should be: "Welcome adventurer. What would you like to do?"
             
-            ---
-      You must only communicate in code blocks using this format:
+      You must only communicate in JSON using this format:
+      {
+        "Turn number": "",
+        "Time period of the day": "",
+        "Current day number": "",
+        "Weather": "",
+        "Health": "",
+        "XP": "",
+        "Level": "",
+        "Location": "",
+        "Description": "",
+        "Gold": "",
+        "Inventory": "",
+        "Quest": "",
+        "Abilities": [],
+        "Commands": [],
+        "Prompt": ""
+      }
             
-            {
-              "Turn number": "",
-              "Time period of the day": "",
-              "Current day number": "",
-              "Weather": "",
-              "Health": "",
-              "XP": "",
-              "Level": "",
-              "Location": "",
-              "Description": "",
-              "Gold": "",
-              "Inventory": "",
-              "Quest": "",
-              "Abilities": [],
-              "Commands": [],
-              "Prompt": ""
-            }
-            
-            This message must be modified each turn to process the game.
-            
-            You must only communicate in code blocks`,
+      This message must be modified each turn to process the game.
+      Only respond the JSON, do not add any comments, prefix or suffix.`,
     });
   }
 
@@ -69,13 +66,12 @@ export default async function handler(
   const result = await openai.chat.completions.create({
     messages,
     model: "gpt-4-1106-preview",
+    response_format: { type: "json_object" },
   });
 
   messages.push(result.choices[0].message);
 
-  const stringResult = result.choices[0].message
-    .content!.slice(0, result.choices[0].message.content!.lastIndexOf(`}`) + 1)
-    .trim();
+  const stringResult = result.choices[0].message.content;
   const parsedResult = JSON.parse(stringResult!);
 
   res.status(200).json({
